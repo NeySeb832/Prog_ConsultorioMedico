@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <title>Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+        .caja {
+            margin: 10%;
+            margin-right: 30%;
+            margin-left: 30%;
+        }
+        .t {
+            font-family: 'Lobster', cursive;
+        }
+        .alert-custom {
+            display: flex;
+            align-items: center;
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .alert-custom i {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="caja">
+        <form class="form-control" method="post">  <!-- Quitado action="accesp-login" -->
+            {% csrf_token %}  <!-- Añadido token CSRF -->
+            <h1 class="text-center t">Login</h1>
+
+            {% if mensaje %}
+                <div class="alert alert-custom">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    {{ mensaje }}
+                </div>
+            {% endif %}
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">Usuario</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingrese usuario" name="username" required>
+                <small id="emailHelp" class="form-text text-muted">Su información no será compartida con nadie más.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Contraseña</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" name="password" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Ingresar</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</body>
+</html>

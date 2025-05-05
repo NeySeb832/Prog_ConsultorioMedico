@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Médico | Clínica Salud Integral</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --gradient-primary: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        }
+
+        .user-navbar {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+
+        .navbar-brand-custom {
+            font-weight: 600;
+            color: #6a11cb;
+            font-size: 1.3rem;
+        }
+
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: #6a11cb;
+            font-weight: 500;
+        }
+
+        .welcome-card {
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(106, 17, 203, 0.2);
+        }
+
+        .stats-card {
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+            border: none;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stats-icon {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .appointment-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+
+        .appointment-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .badge-status {
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .badge-confirmada {
+            background: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+        }
+
+        .badge-pendiente {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+
+        .module-card {
+            border-radius: 15px;
+            padding: 25px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .module-card:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .module-card:hover .module-icon,
+        .module-card:hover .text-muted {
+            color: white !important;
+        }
+
+        .module-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #6a11cb;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar (similar a pacientes_pantalla_inicio) -->
+    <nav class="user-navbar navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand navbar-brand-custom" href="medico_dashboard.html">
+                <i class="bi bi-heart-pulse me-2"></i>Clínica Médica
+            </a>
+
+            <div class="d-flex align-items-center">
+                <div class="user-info me-3 d-flex align-items-center">
+                    <div class="user-avatar">
+                        DR
+                    </div>
+                    <div>
+                        <div class="fw-bold">Dr. Carlos Martínez</div>
+                        <div class="small text-muted">Pediatría</div>
+                    </div>
+                </div>
+                <form action="#" method="post">
+                    <button type="submit" class="logout-btn">
+                        <i class="bi bi-box-arrow-right me-1"></i> Salir
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Tarjeta de Bienvenida -->
+        <div class="welcome-card">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h2 class="fw-bold mb-3"><i class="bi bi-heart-pulse me-2"></i>Bienvenido, Dr. Martínez</h2>
+                    <p class="mb-0">Hoy tiene <strong>8 citas programadas</strong>. Su primera cita es a las <strong>09:00 AM</strong> con el paciente Juan Pérez.</p>
+                </div>
+                <div class="col-md-4 text-center text-md-end mt-3 mt-md-0">
+                    <span class="badge bg-light text-primary py-3 px-4 fs-6">
+                        <i class="bi bi-calendar-check me-2"></i>Mayo 15, 2023
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estadísticas Rápidas -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <i class="bi bi-calendar-week stats-icon"></i>
+                    <h3 class="h5">Citas Hoy</h3>
+                    <h2 class="fw-bold">8</h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <i class="bi bi-people stats-icon"></i>
+                    <h3 class="h5">Pacientes Activos</h3>
+                    <h2 class="fw-bold">142</h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <i class="bi bi-file-earmark-medical stats-icon"></i>
+                    <h3 class="h5">Historiales</h3>
+                    <h2 class="fw-bold">24</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Módulos Principales -->
+            <div class="col-lg-4">
+                <h4 class="fw-bold mb-4"><i class="bi bi-grid me-2"></i>Módulos</h4>
+
+                <div class="module-card">
+                    <i class="bi bi-calendar-check module-icon"></i>
+                    <h5 class="fw-bold">Agenda</h5>
+                    <p class="text-muted small">Gestión de citas médicas</p>
+                </div>
+
+                <div class="module-card">
+                    <i class="bi bi-file-earmark-medical module-icon"></i>
+                    <h5 class="fw-bold">Historiales</h5>
+                    <p class="text-muted small">Registros clínicos</p>
+                </div>
+
+                <div class="module-card">
+                    <i class="bi bi-prescription2 module-icon"></i>
+                    <h5 class="fw-bold">Recetas</h5>
+                    <p class="text-muted small">Gestión de medicamentos</p>
+                </div>
+            </div>
+
+            <!-- Próximas Citas -->
+            <div class="col-lg-8">
+                <h4 class="fw-bold mb-4"><i class="bi bi-calendar-event me-2"></i>Próximas Citas</h4>
+
+                <div class="appointment-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-3">
+                                    <h5 class="fw-bold mb-0">09:00 AM</h5>
+                                    <small class="text-muted">15 Mayo</small>
+                                </div>
+                                <div class="col-md-3">
+                                    <h6 class="mb-1">Juan Pérez</h6>
+                                    <small class="text-muted">12 años</small>
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="badge badge-status badge-confirmada">Confirmada</span>
+                                </div>
+                                <div class="col-md-3 text-end">
+                                    <button class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-eye"></i> Ver
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="appointment-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-3">
+                                    <h5 class="fw-bold mb-0">10:30 AM</h5>
+                                    <small class="text-muted">15 Mayo</small>
+                                </div>
+                                <div class="col-md-3">
+                                    <h6 class="mb-1">María Gómez</h6>
+                                    <small class="text-muted">8 años</small>
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="badge badge-status badge-confirmada">Confirmada</span>
+                                </div>
+                                <div class="col-md-3 text-end">
+                                    <button class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-eye"></i> Ver
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="appointment-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-3">
+                                    <h5 class="fw-bold mb-0">02:00 PM</h5>
+                                    <small class="text-muted">15 Mayo</small>
+                                </div>
+                                <div class="col-md-3">
+                                    <h6 class="mb-1">Carlos Rodríguez</h6>
+                                    <small class="text-muted">5 años</small>
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="badge badge-status badge-pendiente">Pendiente</span>
+                                </div>
+                                <div class="col-md-3 text-end">
+                                    <button class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-eye"></i> Ver
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-end mt-3">
+                    <a href="#" class="text-decoration-none">
+                        <i class="bi bi-arrow-right me-1"></i> Ver todas las citas
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Simple -->
+    <footer class="bg-light mt-5 py-3">
+        <div class="container text-center">
+            <p class="mb-0 small text-muted">&copy; 2023 Clínica Salud Integral. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipo Médico | Clínica Salud Integral</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <style>
+        :root {
+            --gradient-primary: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        }
+
+        .doctors-hero {
+            background: var(--gradient-primary),
+                        url('https://images.unsplash.com/photo-1550839720-beea3085e5e6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            margin-bottom: 80px;
+        }
+
+        .doctor-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            background: white;
+            height: 100%;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(106, 17, 203, 0.15);
+        }
+
+        .doctor-img-container {
+            height: 280px;
+            overflow: hidden;
+        }
+
+        .doctor-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .doctor-card:hover .doctor-img {
+            transform: scale(1.05);
+        }
+
+        .specialty-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .doctor-details {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .doctor-name {
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #343a40;
+        }
+
+        .doctor-specialty {
+            color: #6c757d;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .doctor-bio {
+            color: #6c757d;
+            margin-bottom: 0;
+        }
+
+        .filter-section {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            padding: 25px;
+            margin-bottom: 40px;
+        }
+
+        .filter-tag {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 50px;
+            background: #e9ecef;
+            color: #495057;
+            margin: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .filter-tag:hover, .filter-tag.active {
+            background: var(--gradient-primary);
+            color: white;
+        }
+    </style>
+</head>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+        <div class="container">
+            <a class="navbar-brand t" href="#">
+                <i class="bi bi-heart-pulse me-2"></i>
+                Consultorio Salud
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="bi bi-house-door me-1"></i> Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#servicios"><i class="bi bi-clipboard2-pulse me-1"></i> Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#doctores"><i class="bi bi-person-badge me-1"></i> Médicos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-light ms-2" href="/accounts/login/">
+                            <i class="bi bi-box-arrow-in-right me-1"></i> Iniciar Sesión
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="doctors-hero text-center">
+        <div class="container position-relative" data-aos="fade-up">
+            <h1 class="display-3 fw-bold mb-4">Nuestro Equipo Médico</h1>
+            <p class="lead fs-4 mb-5">Profesionales altamente calificados comprometidos con su salud</p>
+        </div>
+    </header>
+
+    <!-- Filtros -->
+    <section class="container mb-5" data-aos="fade-up">
+        <div class="filter-section">
+            <h3 class="h4 text-center mb-4">Filtrar por especialidad</h3>
+            <div class="d-flex flex-wrap justify-content-center">
+                <span class="filter-tag active" data-filter="all">Todos</span>
+                <span class="filter-tag" data-filter="cardiologia">Cardiología</span>
+                <span class="filter-tag" data-filter="pediatria">Pediatría</span>
+                <span class="filter-tag" data-filter="neurologia">Neurología</span>
+                <span class="filter-tag" data-filter="ginecologia">Ginecología</span>
+                <span class="filter-tag" data-filter="traumatologia">Traumatología</span>
+                <span class="filter-tag" data-filter="dermatologia">Dermatología</span>
+            </div>
+        </div>
+
+        <!-- Grid de Médicos -->
+        <div class="row g-4">
+            <!-- Médico 1 -->
+            <div class="col-lg-4 col-md-6" data-specialty="cardiologia" data-aos="fade-up">
+                <div class="doctor-card">
+                    <div class="doctor-img-container">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" class="doctor-img" alt="Dra. María González">
+                        <span class="specialty-badge">Cardióloga</span>
+                    </div>
+                    <div class="doctor-details">
+                        <h3 class="doctor-name">Dra. María González</h3>
+                        <p class="doctor-specialty">Cardiología · Medicina Interna</p>
+                        <p class="doctor-bio">
+                            Especialista en enfermedades cardiovasculares con más de 15 años de experiencia. Certificada por el American Board of Cardiology.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Médico 2 -->
+            <div class="col-lg-4 col-md-6" data-specialty="pediatria" data-aos="fade-up" data-aos-delay="100">
+                <div class="doctor-card">
+                    <div class="doctor-img-container">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="doctor-img" alt="Dr. Carlos Martínez">
+                        <span class="specialty-badge">Pediatra</span>
+                    </div>
+                    <div class="doctor-details">
+                        <h3 class="doctor-name">Dr. Carlos Martínez</h3>
+                        <p class="doctor-specialty">Pediatría · Neonatología</p>
+                        <p class="doctor-bio">
+                            Especializado en cuidado infantil y medicina preventiva para niños. Miembro de la Academia Americana de Pediatría.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Médico 3 -->
+            <div class="col-lg-4 col-md-6" data-specialty="neurologia" data-aos="fade-up" data-aos-delay="200">
+                <div class="doctor-card">
+                    <div class="doctor-img-container">
+                        <img src="https://randomuser.me/api/portraits/women/45.jpg" class="doctor-img" alt="Dra. Laura Sánchez">
+                        <span class="specialty-badge">Neuróloga</span>
+                    </div>
+                    <div class="doctor-details">
+                        <h3 class="doctor-name">Dra. Laura Sánchez</h3>
+                        <p class="doctor-specialty">Neurología · Neurofisiología</p>
+                        <p class="doctor-bio">
+                            Experta en trastornos del sistema nervioso. Investigadora principal en estudios sobre enfermedades neurodegenerativas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Más médicos... -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-5 pb-4">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h3 class="h4 mb-4"><i class="bi bi-heart-pulse me-2"></i>Salud Integral</h3>
+                    <p class="text-white-50">Más de 20 años brindando atención médica especializada con los más altos estándares de calidad.</p>
+                </div>
+                <div class="col-lg-4">
+                    <h4 class="h5 mb-4">Contacto</h4>
+                    <ul class="list-unstyled text-white-50">
+                        <li class="mb-3"><i class="bi bi-geo-alt-fill me-2"></i>Av. Principal 123, Ciudad</li>
+                        <li class="mb-3"><i class="bi bi-telephone-fill me-2"></i>(123) 456-7890</li>
+                        <li class="mb-3"><i class="bi bi-envelope-fill me-2"></i>contacto@clinicasalud.com</li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h4 class="h5 mb-4">Horario</h4>
+                    <ul class="list-unstyled text-white-50">
+                        <li class="mb-2">Lunes-Viernes: 8am - 8pm</li>
+                        <li class="mb-2">Sábados: 9am - 2pm</li>
+                        <li>Emergencias: 24/7</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 bg-secondary">
+            <div class="text-center">
+                <p class="small mb-0">&copy; 2023 Salud Integral. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // Inicializar AOS
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // Filtrado de médicos
+        document.querySelectorAll('.filter-tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                document.querySelector('.filter-tag.active').classList.remove('active');
+                this.classList.add('active');
+
+                const specialty = this.getAttribute('data-filter');
+                const doctors = document.querySelectorAll('[data-specialty]');
+
+                doctors.forEach(doctor => {
+                    if (specialty === 'all' || doctor.getAttribute('data-specialty').includes(specialty)) {
+                        doctor.style.display = 'block';
+                    } else {
+                        doctor.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

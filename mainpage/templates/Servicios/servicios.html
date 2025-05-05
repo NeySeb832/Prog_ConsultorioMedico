@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios Médicos | Clínica Salud Integral</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <style>
+        :root {
+            --gradient-primary: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --gradient-secondary: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+        }
+
+        .service-hero {
+            background: var(--gradient-primary),
+                        url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            padding: 120px 0;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            margin-bottom: 80px;
+        }
+
+        .service-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(106, 17, 203, 0.2);
+        }
+
+        .service-card .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .service-card:hover .card-img-top {
+            transform: scale(1.1);
+        }
+
+        .service-card .card-body {
+            position: relative;
+            z-index: 2;
+            background: white;
+        }
+
+        .service-card .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .service-card:hover .card-overlay {
+            opacity: 0.9;
+        }
+
+        .service-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .filter-nav .nav-link {
+            color: #495057;
+            font-weight: 500;
+            border-radius: 50px;
+            padding: 8px 20px;
+            margin: 0 5px;
+            transition: all 0.3s;
+        }
+
+        .filter-nav .nav-link.active,
+        .filter-nav .nav-link:hover {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+        <div class="container">
+            <a class="navbar-brand t" href="#">
+                <i class="bi bi-heart-pulse me-2"></i>
+                Consultorio Salud
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="bi bi-house-door me-1"></i> Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#servicios"><i class="bi bi-clipboard2-pulse me-1"></i> Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#doctores"><i class="bi bi-person-badge me-1"></i> Médicos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-light ms-2" href="/accounts/login/">
+                            <i class="bi bi-box-arrow-in-right me-1"></i> Iniciar Sesión
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <header class="service-hero text-center">
+        <div class="container position-relative" data-aos="fade-up">
+            <h1 class="display-3 fw-bold mb-4">Nuestros Servicios Médicos</h1>
+            <p class="lead fs-4 mb-5">Tecnología de punta combinada con calidez humana</p>
+            <a href="#servicios" class="btn btn-light btn-lg rounded-pill px-5 py-3 shadow">
+                <i class="bi bi-arrow-down me-2"></i>Explorar
+            </a>
+        </div>
+    </header>
+
+    <!-- Filtro de Servicios -->
+    <section class="container mb-5" id="servicios" data-aos="fade-up">
+        <ul class="nav filter-nav justify-content-center mb-5">
+            <li class="nav-item">
+                <a class="nav-link active" href="#" data-filter="all">Todos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-filter="diagnostico">Diagnóstico</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-filter="tratamiento">Tratamientos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-filter="prevencion">Prevención</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-filter="especialidad">Especialidades</a>
+            </li>
+        </ul>
+
+        <!-- Grid de Servicios -->
+        <div class="row g-4">
+            <!-- Servicio 1 -->
+            <div class="col-lg-4 col-md-6" data-category="diagnostico especialidad">
+                <div class="service-card h-100" data-aos="zoom-in">
+                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Cardiología">
+                    <span class="service-badge bg-success text-white rounded-pill px-3 py-1 shadow-sm">Popular</span>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h3 class="h5 mb-0">Cardiología Avanzada</h3>
+                            <i class="bi bi-heart-pulse feature-icon"></i>
+                        </div>
+                        <p class="card-text text-muted">Evaluación integral del sistema cardiovascular con tecnología de última generación.</p>
+                        <ul class="list-unstyled text-muted mb-3">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Electrocardiograma digital</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Prueba de esfuerzo</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Ecocardiograma 4D</li>
+                        </ul>
+                        <a href="#" class="btn btn-outline-primary w-100 mt-2">Más información</a>
+                    </div>
+                    <div class="card-overlay">
+                        <div class="text-center p-4">
+                            <h3 class="h4 text-white">Cardiología Avanzada</h3>
+                            <p class="text-white-50 mb-3">Tecnología de punta para el cuidado de tu corazón</p>
+                            <a href="#" class="btn btn-light rounded-pill px-4">Agendar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Servicio 2 -->
+            <div class="col-lg-4 col-md-6" data-category="diagnostico">
+                <div class="service-card h-100" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1579165466747-6fba06c3e6a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Laboratorio">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h3 class="h5 mb-0">Laboratorio Clínico</h3>
+                            <i class="bi bi-eyedropper feature-icon"></i>
+                        </div>
+                        <p class="card-text text-muted">Análisis clínicos con resultados precisos y en tiempo récord.</p>
+                        <ul class="list-unstyled text-muted mb-3">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Hematología completa</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Perfil bioquímico</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Marcadores tumorales</li>
+                        </ul>
+                        <a href="#" class="btn btn-outline-primary w-100 mt-2">Más información</a>
+                    </div>
+                    <div class="card-overlay">
+                        <div class="text-center p-4">
+                            <h3 class="h4 text-white">Laboratorio Clínico</h3>
+                            <p class="text-white-50 mb-3">Resultados confiables en menos de 24 horas</p>
+                            <a href="#" class="btn btn-light rounded-pill px-4">Agendar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Servicio 3 -->
+            <div class="col-lg-4 col-md-6" data-category="tratamiento especialidad">
+                <div class="service-card h-100" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Fisioterapia">
+                    <span class="service-badge bg-info text-white rounded-pill px-3 py-1 shadow-sm">Nuevo</span>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h3 class="h5 mb-0">Rehabilitación Física</h3>
+                            <i class="bi bi-activity feature-icon"></i>
+                        </div>
+                        <p class="card-text text-muted">Programas personalizados para recuperación motora y tratamiento del dolor.</p>
+                        <ul class="list-unstyled text-muted mb-3">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Terapia manual</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Electroterapia</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Hidroterapia</li>
+                        </ul>
+                        <a href="#" class="btn btn-outline-primary w-100 mt-2">Más información</a>
+                    </div>
+                    <div class="card-overlay">
+                        <div class="text-center p-4">
+                            <h3 class="h4 text-white">Rehabilitación Física</h3>
+                            <p class="text-white-50 mb-3">Recupera tu movilidad con nuestros especialistas</p>
+                            <a href="#" class="btn btn-light rounded-pill px-4">Agendar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ... más servicios ... -->
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-5 bg-light mt-5">
+        <div class="container text-center py-5" data-aos="fade-up">
+            <h2 class="display-5 fw-bold mb-4">¿No encuentras lo que necesitas?</h2>
+            <p class="lead mb-5">Contamos con más de 30 especialidades médicas. Nuestros asesores pueden ayudarte a encontrar el servicio perfecto para tus necesidades.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="#" class="btn btn-primary btn-lg rounded-pill px-5 py-3">
+                    <i class="bi bi-telephone me-2"></i>Llamar ahora
+                </a>
+                <a href="#" class="btn btn-outline-primary btn-lg rounded-pill px-5 py-3">
+                    <i class="bi bi-chat-dots me-2"></i>Chat en vivo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Premium -->
+    <footer class="bg-dark text-white pt-5 pb-4">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h3 class="h4 mb-4"><i class="bi bi-heart-pulse me-2"></i>Salud Integral</h3>
+                    <p class="text-white-50">Más de 20 años brindando atención médica especializada con los más altos estándares de calidad.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#" class="text-white me-3"><i class="bi bi-facebook fs-5"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-instagram fs-5"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-linkedin fs-5"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-youtube fs-5"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h4 class="h5 mb-4">Servicios</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Cardiología</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Pediatría</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Ginecología</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Traumatología</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h4 class="h5 mb-4">Enlaces</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Inicio</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Médicos</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Servicios</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h4 class="h5 mb-4">Contacto</h4>
+                    <ul class="list-unstyled text-white-50">
+                        <li class="mb-3"><i class="bi bi-geo-alt-fill me-2"></i>Av. Principal 123, Ciudad</li>
+                        <li class="mb-3"><i class="bi bi-telephone-fill me-2"></i>(123) 456-7890</li>
+                        <li class="mb-3"><i class="bi bi-envelope-fill me-2"></i>contacto@clinicasalud.com</li>
+                        <li><i class="bi bi-clock-fill me-2"></i>Lun-Vie: 8am - 8pm</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 bg-secondary">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small mb-0">&copy; 2023 Salud Integral. Todos los derechos reservados.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="small mb-0">
+                        <a href="#" class="text-white-50 text-decoration-none">Políticas de privacidad</a> |
+                        <a href="#" class="text-white-50 text-decoration-none">Términos de servicio</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // Inicializar AOS (Animate On Scroll)
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // Filtrado de servicios
+        document.querySelectorAll('.filter-nav .nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                // Actualizar navegación activa
+                document.querySelector('.filter-nav .nav-link.active').classList.remove('active');
+                this.classList.add('active');
+
+                const filter = this.getAttribute('data-filter');
+                const services = document.querySelectorAll('[data-category]');
+
+                services.forEach(service => {
+                    if (filter === 'all' || service.getAttribute('data-category').includes(filter)) {
+                        service.style.display = 'block';
+                    } else {
+                        service.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
