@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.urls import path
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,6 +25,10 @@ urlpatterns = [
     path('', include('mainpage.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
 
-    path('accounts/login/dashboard/', include('pacientes.urls')),
+    path('redirigir/', views.redirect_by_role, name='redirect_by_role'),
 
-]
+    path('admin/', admin.site.urls),
+    path('paciente/', include('pacientes.urls')),
+    path('medico/', include('doctores.urls')),
+
+ ]

@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mainpage',
     'usuarios',
+    'pacientes',
+    'doctores'
 ]
 
 MIDDLEWARE = [
@@ -134,5 +136,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
-LOGIN_REDIRECT_URL = 'dashboard' #Pagina redireccionada despues de un login exitoso
+LOGIN_REDIRECT_URL = '/redirigir/'
 LOGOUT_REDIRECT_URL = 'home' #PAgina redireccionada despues de un cierre de sesion

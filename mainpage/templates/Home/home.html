@@ -58,35 +58,38 @@
 </head>
 <body>
     <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
-        <div class="container">
-            <a class="navbar-brand t" href="#">
-                <i class="bi bi-heart-pulse me-2"></i>
-                Consultorio Salud
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#"><i class="bi bi-house-door me-1"></i> Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#servicios"><i class="bi bi-clipboard2-pulse me-1"></i> Servicios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#doctores"><i class="bi bi-person-badge me-1"></i> Médicos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-outline-light ms-2" href="/accounts/login/">
-                            <i class="bi bi-box-arrow-in-right me-1"></i> Iniciar Sesión
-                        </a>
-                    </li>
-                </ul>
-            </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+    <div class="container">
+        <a class="navbar-brand t" href="{% url 'home' %}">
+            <i class="bi bi-heart-pulse me-2"></i>
+            Consultorio Salud
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'home' %}"><i class="bi bi-house-door me-1"></i> Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'Nuestros Servicios' %}"><i class="bi bi-clipboard2-pulse me-1"></i> Servicios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'Nuestros Medicos' %}"><i class="bi bi-person-badge me-1"></i> Médicos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'Sobre nosotros' %}"><i class="bi bi-info-circle me-1"></i> Sobre Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-outline-light ms-2" href="/accounts/login/">
+                        <i class="bi bi-box-arrow-in-right me-1"></i> Iniciar Sesión
+                    </a>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <div class="container">
         <!-- Sección Hero -->

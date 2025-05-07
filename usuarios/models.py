@@ -1,28 +1,17 @@
 from django.db import models
-
-# Create your models here.
 from django.contrib.auth.models import User
-from django.db import models
-from django.dispatch import receiver
-from django.db.models.signals import post_save
 
 class Profile(models.Model):
-    ROLE_CHOICES = [
+    ROLE_CHOICES = (
         ('ADMIN', 'Administrador'),
-        ('DOCTOR', 'Médico'),
-        ('PATIENT', 'Paciente'),
+        ('DOCTOR', 'Doctor'),
         ('STAFF', 'Secretaría'),
-    ]
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='PATIENT')
+        ('PATIENT', 'Paciente'),
+    )
 
-# Señales para crear/actualizar Profile automáticamente
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES)
+    especialidad = models.CharField(max_length=50, blank=True, null=True)  # si aplica
 
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    if hasattr(instance, 'profile'):
-        instance.profile.save()
+    def __str__(self):
+        return f"{self.user.username} - {self.role}"

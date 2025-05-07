@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cancelar Cita | Clínica Salud Integral</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --gradient-primary: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        }
+
+        .appointment-btn {
+            background: var(--gradient-primary);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #6a11cb;
+            color: #6a11cb;
+            font-weight: 600;
+        }
+
+        .btn-outline:hover {
+            background: #6a11cb;
+            color: white;
+        }
+
+        .confirm-card {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+
+        body {
+            background: #f4f6f9;
+        }
+
+        .navbar-brand-custom {
+            font-weight: 600;
+            color: #6a11cb;
+            font-size: 1.3rem;
+        }
+
+        .user-navbar {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="user-navbar navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand navbar-brand-custom" href="{% url 'pacientes_dashboard' %}">
+            <i class="bi bi-heart-pulse me-2"></i>Clínica Médica
+        </a>
+        <div class="d-flex align-items-center">
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-outline-primary">
+                    <i class="bi bi-box-arrow-right me-1"></i> Salir
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="confirm-card">
+        <h4 class="fw-bold text-danger mb-3"><i class="bi bi-exclamation-triangle me-2"></i>Confirmar Cancelación</h4>
+        <p>¿Estás seguro de que deseas <strong>cancelar</strong> la siguiente cita médica?</p>
+
+        <ul class="list-group mb-4">
+            <li class="list-group-item"><strong>Fecha:</strong> {{ cita.fecha|date:"d M Y" }}</li>
+            <li class="list-group-item"><strong>Hora:</strong> {{ cita.hora|time:"H:i" }}</li>
+            <li class="list-group-item"><strong>Especialista:</strong> {{ cita.especialista }}</li>
+            <li class="list-group-item"><strong>Área:</strong> {{ cita.area }}</li>
+            <li class="list-group-item"><strong>Lugar:</strong> {{ cita.lugar }}</li>
+        </ul>
+
+        <form method="post" class="d-flex justify-content-between">
+            {% csrf_token %}
+            <a href="{% url 'ver_citas' %}" class="btn btn-outline">
+                <i class="bi bi-arrow-left me-2"></i> Volver
+            </a>
+            <button type="submit" class="appointment-btn">
+                <i class="bi bi-trash me-2"></i> Eliminar Cita
+            </button>
+        </form>
+    </div>
+</div>
+
+<footer class="bg-light mt-5 py-3">
+    <div class="container text-center">
+        <p class="mb-0 small text-muted">&copy; 2025 Clínica Salud Integral. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
