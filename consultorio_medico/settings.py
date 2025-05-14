@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'mainpage',
     'usuarios',
     'pacientes',
-    'doctores'
+    'doctores',
+    'secretaria',
 ]
 
 MIDDLEWARE = [

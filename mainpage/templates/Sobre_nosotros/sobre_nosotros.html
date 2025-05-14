@@ -1,9 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre Nosotros | Clínica Salud Integral</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
@@ -11,21 +12,37 @@
             --gradient-primary: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
         }
 
+        body {
+            background-color: #f4f6f9;
+        }
+
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar-brand-custom {
+            font-weight: 600;
+            color: #6a11cb;
+            font-size: 1.3rem;
+        }
+
         .about-hero {
-            background: var(--gradient-primary),
+            background: linear-gradient(rgba(106, 17, 203, 0.6), rgba(37, 117, 252, 0.6)),
                         url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
             color: white;
             padding: 120px 0;
             margin-bottom: 80px;
+            text-align: center;
         }
 
         .about-card {
             border: none;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s;
             height: 100%;
         }
@@ -78,35 +95,37 @@
             background: var(--gradient-primary);
             border: 4px solid white;
         }
+
+        footer {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 30px 0;
+        }
+
+        .text-white-50 {
+            color: rgba(255, 255, 255, 0.75) !important;
+        }
     </style>
 </head>
 <body>
-    <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg user-navbar mb-4">
     <div class="container">
-        <a class="navbar-brand t" href="{% url 'home' %}">
-            <i class="bi bi-heart-pulse me-2"></i>
-            Consultorio Salud
+        <a class="navbar-brand navbar-brand-custom" href="{% url 'home' %}">
+            <i class="bi bi-heart-pulse me-2"></i>Consultorio Salud
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}"><i class="bi bi-house-door me-1"></i>Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'Nuestros Servicios' %}"><i class="bi bi-clipboard2-pulse me-1"></i>Servicios</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'Nuestros Medicos' %}"><i class="bi bi-person-badge me-1"></i>Médicos</a></li>
+                <li class="nav-item"><a class="nav-link active" href="{% url 'Sobre nosotros' %}"><i class="bi bi-info-circle me-1"></i>Sobre Nosotros</a></li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{% url 'home' %}"><i class="bi bi-house-door me-1"></i> Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'Nuestros Servicios' %}"><i class="bi bi-clipboard2-pulse me-1"></i> Servicios</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'Nuestros Medicos' %}"><i class="bi bi-person-badge me-1"></i> Médicos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'Sobre nosotros' %}"><i class="bi bi-info-circle me-1"></i> Sobre Nosotros</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-outline-light ms-2" href="/accounts/login/">
+                    <a class="nav-link btn btn-outline-primary ms-3" href="/accounts/login/">
                         <i class="bi bi-box-arrow-in-right me-1"></i> Iniciar Sesión
                     </a>
                 </li>
@@ -115,130 +134,111 @@
     </div>
 </nav>
 
+<!-- Hero -->
+<header class="about-hero">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-3">Nuestra Historia</h1>
+        <p class="lead fs-4">Más de 20 años cuidando de tu salud con excelencia</p>
+    </div>
+</header>
 
-    <!-- Hero Section -->
-    <header class="about-hero text-center">
-        <div class="container">
-            <h1 class="display-4 fw-bold mb-3">Nuestra Historia</h1>
-            <p class="lead fs-4">Más de 20 años cuidando de tu salud con excelencia</p>
+<!-- Historia -->
+<section class="container mb-5">
+    <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+            <h2 class="fw-bold mb-4">Nuestros Inicios</h2>
+            <p>Fundada en 2003 por el Dr. Javier Rodríguez, nuestra clínica nació con la visión de ofrecer atención médica personalizada en un ambiente cálido y profesional.</p>
+            <p>Lo que comenzó como un pequeño consultorio hoy es un centro médico integral con más de 15 especialidades y tecnología de punta.</p>
         </div>
-    </header>
-
-    <!-- Sección Historia -->
-    <section class="container mb-5">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mb-4 mb-lg-0">
-                <h2 class="fw-bold mb-4">Nuestros Inicios</h2>
-                <p>Fundada en el año 2003 por el Dr. Javier Rodríguez, nuestra clínica nació con la visión de ofrecer atención médica personalizada en un ambiente cálido y profesional.</p>
-                <p>Lo que comenzó como un pequeño consultorio con dos especialidades, hoy es un centro médico integral con más de 15 especialidades y tecnología de punta.</p>
-            </div>
-            <div class="col-lg-6">
-                <div class="about-card">
-                    <img src="https://images.unsplash.com/photo-1579684453423-f84349ef60b0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="about-img w-100" alt="Consultorio antiguo">
-                    <div class="card-body">
-                        <p class="text-muted small">Nuestro primer consultorio en 2003</p>
-                    </div>
+        <div class="col-lg-6">
+            <div class="about-card">
+                <img src="https://images.unsplash.com/photo-1579684453423-f84349ef60b0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="about-img w-100" alt="Consultorio antiguo">
+                <div class="card-body">
+                    <p class="text-muted small">Nuestro primer consultorio en 2003</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Línea de Tiempo -->
-    <section class="bg-light py-5 mb-5">
-        <div class="container">
-            <h2 class="fw-bold text-center mb-5">Nuestra Evolución</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <h4 class="fw-bold">2003</h4>
-                    <p>Apertura del consultorio con especialidades en Medicina General y Pediatría.</p>
-                </div>
-                <div class="timeline-item">
-                    <h4 class="fw-bold">2010</h4>
-                    <p>Expansión a nuevo local con 5 consultorios y incorporación de Cardiología y Ginecología.</p>
-                </div>
-                <div class="timeline-item">
-                    <h4 class="fw-bold">2015</h4>
-                    <p>Certificación como Centro Médico Integral por el Ministerio de Salud.</p>
-                </div>
-                <div class="timeline-item">
-                    <h4 class="fw-bold">2023</h4>
-                    <p>Modernización completa con equipos de última generación y 15 especialidades médicas.</p>
-                </div>
-            </div>
+<!-- Línea de Tiempo -->
+<section class="bg-light py-5 mb-5">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-5">Nuestra Evolución</h2>
+        <div class="timeline">
+            <div class="timeline-item"><h4 class="fw-bold">2003</h4><p>Apertura con Medicina General y Pediatría.</p></div>
+            <div class="timeline-item"><h4 class="fw-bold">2010</h4><p>Expansión a nuevo local y nuevas especialidades.</p></div>
+            <div class="timeline-item"><h4 class="fw-bold">2015</h4><p>Certificación como Centro Médico Integral.</p></div>
+            <div class="timeline-item"><h4 class="fw-bold">2023</h4><p>Modernización completa y 15 especialidades.</p></div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Valores -->
-    <section class="container mb-5">
-        <h2 class="fw-bold text-center mb-5">Nuestros Valores</h2>
+<!-- Valores -->
+<section class="container mb-5">
+    <h2 class="fw-bold text-center mb-5">Nuestros Valores</h2>
+    <div class="row g-4">
+        <div class="col-md-4 text-center p-4">
+            <i class="bi bi-heart-fill value-icon"></i>
+            <h4 class="fw-bold mb-3">Compasión</h4>
+            <p>Trato humano y empático con cada paciente.</p>
+        </div>
+        <div class="col-md-4 text-center p-4">
+            <i class="bi bi-award-fill value-icon"></i>
+            <h4 class="fw-bold mb-3">Excelencia</h4>
+            <p>Altos estándares médicos y profesionalismo constante.</p>
+        </div>
+        <div class="col-md-4 text-center p-4">
+            <i class="bi bi-people-fill value-icon"></i>
+            <h4 class="fw-bold mb-3">Comunidad</h4>
+            <p>Compromiso con el bienestar social y la salud pública.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Instalaciones -->
+<section class="bg-light py-5 mb-5">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-5">Nuestras Instalaciones</h2>
         <div class="row g-4">
             <div class="col-md-4">
-                <div class="text-center p-4">
-                    <i class="bi bi-heart-fill value-icon"></i>
-                    <h4 class="fw-bold mb-3">Compasión</h4>
-                    <p>Trato humano y empático con cada paciente, entendiendo sus necesidades individuales.</p>
+                <div class="about-card">
+                    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="about-img w-100" alt="Recepción">
+                    <div class="card-body">
+                        <h5 class="fw-bold">Recepción</h5>
+                        <p class="text-muted">Área cómoda y moderna para nuestros pacientes.</p>
+                    </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="text-center p-4">
-                    <i class="bi bi-award-fill value-icon"></i>
-                    <h4 class="fw-bold mb-3">Excelencia</h4>
-                    <p>Mantenemos los más altos estándares médicos con profesionalismo y actualización constante.</p>
+                <div class="about-card">
+                    <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="about-img w-100" alt="Consultorio">
+                    <div class="card-body">
+                        <h5 class="fw-bold">Consultorios</h5>
+                        <p class="text-muted">Ambientes equipados con tecnología avanzada.</p>
+                    </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="text-center p-4">
-                    <i class="bi bi-people-fill value-icon"></i>
-                    <h4 class="fw-bold mb-3">Comunidad</h4>
-                    <p>Comprometidos con el bienestar de nuestra comunidad a través de programas de salud preventiva.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Instalaciones -->
-    <section class="bg-light py-5 mb-5">
-        <div class="container">
-            <h2 class="fw-bold text-center mb-5">Nuestras Instalaciones</h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="about-card">
-                        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="about-img w-100" alt="Recepción">
-                        <div class="card-body">
-                            <h5 class="fw-bold">Recepción</h5>
-                            <p class="text-muted">Área de espera cómoda y acogedora para nuestros pacientes.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="about-card">
-                        <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="about-img w-100" alt="Consultorio">
-                        <div class="card-body">
-                            <h5 class="fw-bold">Consultorios</h5>
-                            <p class="text-muted">Equipados con tecnología médica de última generación.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="about-card">
-                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="about-img w-100" alt="Laboratorio">
-                        <div class="card-body">
-                            <h5 class="fw-bold">Laboratorio</h5>
-                            <p class="text-muted">Análisis clínicos con resultados rápidos y precisos.</p>
-                        </div>
+                <div class="about-card">
+                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="about-img w-100" alt="Laboratorio">
+                    <div class="card-body">
+                        <h5 class="fw-bold">Laboratorio</h5>
+                        <p class="text-muted">Resultados rápidos y confiables en análisis clínicos.</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Footer Básico -->
-    <footer class="bg-dark text-white py-4">
-        <div class="container text-center">
-            <p class="mb-0">&copy; 2023 Clínica Salud Integral. Todos los derechos reservados.</p>
-        </div>
-    </footer>
+<!-- Footer -->
+<footer class="text-center text-white">
+    <div class="container">
+        <p class="mb-0 small">&copy; 2025 Clínica Salud Integral. Todos los derechos reservados.</p>
+    </div>
+</footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

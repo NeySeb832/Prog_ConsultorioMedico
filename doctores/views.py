@@ -23,6 +23,7 @@ def doctores_dashboard(request):
 
 
 @login_required
+@role_required(['DOCTOR', 'ADMIN'])
 def detalle_cita(request, cita_id):
     cita = get_object_or_404(Cita, id=cita_id, doctor=request.user)
     return render(request, 'medicos/medicos_detalle_cita.html', {'cita': cita})

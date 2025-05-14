@@ -104,11 +104,11 @@
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-md-3">
-                                <h5 class="fw-bold mb-0">{{ cita.hora|time:"H:i" }}</h5>
+                                <h5 class="fw-bold mb-0">{{ cita.hora|time:"h:i A" }}</h5>
                                 <small class="text-muted">{{ cita.fecha|date:"d M Y" }}</small>
                             </div>
                             <div class="col-md-3">
-                                <h6 class="mb-1">{{ cita.especialista }}</h6>
+                                <h6 class="fw-bold mb-0">{{ cita.doctor.get_full_name }}</h6>
                                 <small class="text-muted">{{ cita.area }}</small>
                             </div>
                             <div class="col-md-3">

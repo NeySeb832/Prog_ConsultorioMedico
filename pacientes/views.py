@@ -15,11 +15,13 @@ def pacientes_dashboard(request):
     return render(request, 'pacientes/pacientes_pantalla_inicio.html', context)
 
 @login_required
+@role_required(['PATIENT', 'ADMIN'])
 def ver_citas(request):
     citas = Cita.objects.filter(paciente=request.user, estado='ACTIVA').order_by('fecha', 'hora')
     return render(request, 'pacientes/pacientes_ver_citas.html', {'citas': citas})
 
 @login_required
+@role_required(['PATIENT', 'ADMIN'])
 def crear_cita(request):
     doctores = User.objects.filter(profile__role='DOCTOR')
     horas_disponibles = generar_intervalos()
@@ -77,6 +79,7 @@ def crear_cita(request):
     })
 
 @login_required
+@role_required(['PATIENT', 'ADMIN'])
 def editar_cita(request, cita_id):
     cita = get_object_or_404(Cita, id=cita_id, paciente=request.user)
     doctores = User.objects.filter(profile__role='DOCTOR')
@@ -129,6 +132,7 @@ def editar_cita(request, cita_id):
     })
 
 @login_required
+@role_required(['PATIENT', 'ADMIN'])
 def eliminar_cita(request, cita_id):
     cita = get_object_or_404(Cita, id=cita_id, paciente=request.user)
     if request.method == 'POST':
