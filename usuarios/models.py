@@ -1,10 +1,10 @@
 # -----------------------------------------------------------------------------
 # Nombre del Programa : Sistema de Gestión de Consultorio Médico
 # Nombre del Módulo   : models.py (módulo usuarios)
-# Función del Archivo : Define el modelo Profile que extiende el modelo de usuario con rol y especialidad.
+# Función del Archivo : Define el modelo Profile que extiende el modelo de usuario con rol, contacto y especialidad.
 # Programador         : Neyder Sebastian Orozco Villamil
-# Fecha               : 22/05/2025
-# Versión             : 1.0
+# Fecha               : 23/05/2025
+# Versión             : 1.1
 # -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
@@ -14,33 +14,41 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # -----------------------------------------------------------------------------
+# CONSTANTE: ROLE_CHOICES
+# Descripción:
+#   Define las opciones válidas para el campo de rol del perfil.
+# -----------------------------------------------------------------------------
+ROLE_CHOICES = (
+    ('ADMIN', 'Administrador'),
+    ('DOCTOR', 'Doctor'),
+    ('STAFF', 'Secretaria'),
+    ('PATIENT', 'Paciente'),
+)
+
+# -----------------------------------------------------------------------------
 # MODELO: Profile
 # Descripción:
-#   Extiende el modelo User para añadir un campo de rol y, si aplica,
-#   una especialidad médica (para los doctores).
+#   Extiende el modelo User para añadir información adicional como:
+#   - Rol del usuario.
+#   - Teléfono de contacto.
+#   - Dirección de residencia.
+#   - Especialidad médica (opcional, para doctores).
 #
 # Relación:
 #   - Uno a Uno con el modelo User (cada usuario tiene un perfil único).
 #
 # Campos:
-#   - role: Rol del usuario (ADMIN, DOCTOR, STAFF, PATIENT).
+#   - user: Relación uno a uno con el usuario.
+#   - role: Rol asignado al usuario (ADMIN, DOCTOR, STAFF, PATIENT).
+#   - telefono: Número de contacto (opcional).
+#   - direccion: Dirección de residencia (opcional).
 #   - especialidad: Campo opcional para la especialidad médica (solo doctores).
 # -----------------------------------------------------------------------------
 class Profile(models.Model):
-    ROLE_CHOICES = (
-        ('ADMIN', 'Administrador'),
-        ('DOCTOR', 'Doctor'),
-        ('STAFF', 'Secretaría'),
-        ('PATIENT', 'Paciente'),
-    )
-
-    # Asociación uno a uno con el usuario del sistema
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-
-    # Rol asignado al usuario
     role = models.CharField(max_length=10, choices=ROLE_CHOICES)
-
-    # Especialidad médica (solo aplicable si el rol es DOCTOR)
+    telefono = models.CharField(max_length=20, blank=True, null=True)
+    direccion = models.TextField(blank=True, null=True)
     especialidad = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):

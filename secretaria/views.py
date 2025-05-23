@@ -6,7 +6,9 @@
 # Fecha               : 22/05/2025
 # Versión             : 1.0
 # -----------------------------------------------------------------------------
+import traceback
 
+from django.http import HttpResponseServerError
 # -----------------------------------------------------------------------------
 # IMPORTACIÓN DE MÓDULOS NECESARIOS
 # -----------------------------------------------------------------------------
@@ -242,38 +244,48 @@ def gestionar_pacientes_secretaria(request):
 # -----------------------------------------------------------------------------
 @login_required
 def crear_paciente(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        email = request.POST.get('email')
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
+    try:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            email = request.POST.get('email')
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
+            telefono = request.POST.get('telefono')
+            direccion = request.POST.get('direccion')
 
-        if User.objects.filter(username=username).exists():
-            messages.error(request, "El nombre de usuario ya está en uso.")
-        elif User.objects.filter(email=email).exists():
-            messages.error(request, "El correo ya está registrado.")
-        else:
-            usuario = User.objects.create_user(
-                username=username,
-                email=email,
-                password=password,
-                first_name=first_name,
-                last_name=last_name
-            )
+            if User.objects.filter(username=username).exists():
+                messages.error(request, "El nombre de usuario ya está en uso.")
+            elif User.objects.filter(email=email).exists():
+                messages.error(request, "El correo ya está registrado.")
+            else:
+                usuario = User.objects.create_user(
+                    username=username,
+                    email=email,
+                    password=password,
+                    first_name=first_name,
+                    last_name=last_name
+                )
 
-            try:
-                grupo_pacientes = Group.objects.get(name='pacientes')
-                grupo_pacientes.user_set.add(usuario)
-            except Group.DoesNotExist:
-                messages.warning(request, "El grupo 'pacientes' no existe. El usuario fue creado sin grupo.")
+                try:
+                    grupo_pacientes = Group.objects.get(name='pacientes')
+                    grupo_pacientes.user_set.add(usuario)
+                except Group.DoesNotExist:
+                    messages.warning(request, "El grupo 'pacientes' no existe. El usuario fue creado sin grupo.")
 
-            Profile.objects.create(user=usuario, role='PATIENT')
+                perfil = usuario.profile
+                perfil.role = 'PATIENT'
+                perfil.telefono = telefono
+                perfil.direccion = direccion
+                perfil.save()
 
-            messages.success(request, f"Usuario {usuario.username} creado exitosamente.")
-            return redirect('gestionar_pacientes')
+                messages.success(request, f"Usuario {usuario.username} creado exitosamente.")
+                return redirect('gestionar_pacientes')
 
-    return render(request, 'secretaria/secretaria_crear_usuario.html')
+        return render(request, 'secretaria/secretaria_crear_usuario.html')
+
+    except Exception as e:
+        return HttpResponseServerError(f"<pre>{traceback.format_exc()}</pre>")
 
 # -----------------------------------------------------------------------------
 # VISTA: editar_paciente
