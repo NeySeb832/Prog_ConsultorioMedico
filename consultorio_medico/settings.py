@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # CONFIGURACIÓN DE SEGURIDAD Y DEBUG
 # -----------------------------------------------------------------------------
 SECRET_KEY = 'django-insecure-2)+&c17p%b8l^al4s101pxyq=90r$f#*y0o@h*%+b_v^laoar6'
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = []
 
 # -----------------------------------------------------------------------------
@@ -98,7 +98,7 @@ DATABASES = {
         'NAME': 'consultorio',
         'USER': 'admin',
         'PASSWORD': 'NeySeb832',
-        'HOST': '127.0.0.1',
+        'HOST': 'localhost',
         'PORT': '3306',
     }
 }
@@ -120,6 +120,10 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.73']
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+LANGUAGE_CODE = 'pt-br'
 
 # -----------------------------------------------------------------------------
 # CONFIGURACIÓN INTERNACIONALIZACIÓN Y ZONA HORARIA
