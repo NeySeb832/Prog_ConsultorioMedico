@@ -2,284 +2,229 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Equipo Médico | Clínica Salud Integral</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
-    <style>
-        :root {
-            --gradient-primary: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-        }
+  <meta charset="UTF-8">
+  <title>Equipo Médico | Clínica Salud Integral</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <style>
+    :root {
+      --gradient-primary: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    }
 
-        body {
-            background-color: #f4f6f9;
-        }
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #f4f6f9;
+    }
 
-        .navbar {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
+    .navbar {
+      background: white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
 
-        .navbar-brand-custom {
-            font-weight: 600;
-            color: #6a11cb;
-            font-size: 1.3rem;
-        }
+    .navbar-brand-custom {
+      font-weight: 600;
+      color: #6a11cb;
+      font-size: 1.2rem;
+    }
 
-        .doctors-hero {
-            background: linear-gradient(rgba(106, 17, 203, 0.6), rgba(37, 117, 252, 0.6)),
-                        url('https://images.unsplash.com/photo-1550839720-beea3085e5e6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 120px 0;
-            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
-            margin-bottom: 80px;
-            text-align: center;
-        }
+    .hero-section {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
 
-        .doctor-card {
-            border: none;
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            background: white;
-            height: 100%;
-        }
+    .filter-section {
+      background-color: white;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
 
-        .doctor-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(106, 17, 203, 0.15);
-        }
+    .filter-tag {
+      display: inline-block;
+      padding: 5px 15px;
+      border-radius: 50px;
+      background: #e9ecef;
+      color: #495057;
+      margin: 3px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.85rem;
+    }
 
-        .doctor-img-container {
-            height: 280px;
-            overflow: hidden;
-        }
+    .filter-tag:hover,
+    .filter-tag.active {
+      background: var(--gradient-primary);
+      color: white;
+    }
 
-        .doctor-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
+    .doctor-card {
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      padding: 15px;
+    }
 
-        .doctor-card:hover .doctor-img {
-            transform: scale(1.05);
-        }
+    .doctor-card:hover {
+      transform: translateY(-3px);
+    }
 
-        .specialty-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
+    .doctor-img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #6a11cb;
+      margin-right: 15px;
+    }
 
-        .doctor-details {
-            padding: 25px;
-            text-align: center;
-        }
+    .doctor-info h6 {
+      margin: 0;
+      font-weight: 600;
+      font-size: 1rem;
+    }
 
-        .doctor-name {
-            font-weight: 700;
-            margin-bottom: 5px;
-            color: #343a40;
-        }
+    .doctor-info small {
+      display: block;
+      color: #6c757d;
+      font-size: 0.85rem;
+    }
 
-        .doctor-specialty {
-            color: #6c757d;
-            font-weight: 500;
-            margin-bottom: 15px;
-        }
+    .doctor-info p {
+      margin: 5px 0 0;
+      font-size: 0.85rem;
+      color: #6c757d;
+    }
 
-        .doctor-bio {
-            color: #6c757d;
-            margin-bottom: 0;
-        }
+    .footer {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 12px 0;
+      text-align: center;
+    }
 
-        .filter-section {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            padding: 25px;
-            margin-bottom: 40px;
-        }
-
-        .filter-tag {
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 50px;
-            background: #e9ecef;
-            color: #495057;
-            margin: 5px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-        }
-
-        .filter-tag:hover, .filter-tag.active {
-            background: var(--gradient-primary);
-            color: white;
-        }
-
-        footer {
-            background: var(--gradient-primary);
-            color: white;
-            padding: 30px 0;
-        }
-
-        .text-white-50 {
-            color: rgba(255, 255, 255, 0.75) !important;
-        }
-
-        .btn-outline-light {
-            border-color: white;
-            color: white;
-        }
-
-        .btn-outline-light:hover {
-            background-color: white;
-            color: #2575fc;
-        }
-    </style>
+    .container-fixed {
+      height: calc(100vh - 130px);
+    }
+  </style>
 </head>
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg user-navbar mb-4">
-    <div class="container">
-        <a class="navbar-brand navbar-brand-custom" href="{% url 'home' %}">
-            <i class="bi bi-heart-pulse me-2"></i>Consultorio Salud
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link active" href="{% url 'home' %}"><i class="bi bi-house-door me-1"></i>Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'Nuestros Servicios' %}"><i class="bi bi-clipboard2-pulse me-1"></i>Servicios</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'Nuestros Medicos' %}"><i class="bi bi-person-badge me-1"></i>Médicos</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'Sobre nosotros' %}"><i class="bi bi-info-circle me-1"></i>Sobre Nosotros</a></li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-outline-primary ms-3" href="/accounts/login/">
-                        <i class="bi bi-box-arrow-in-right me-1"></i> Iniciar Sesión
-                    </a>
-                </li>
-            </ul>
-        </div>
+<nav class="navbar navbar-expand-lg user-navbar">
+  <div class="container">
+    <a class="navbar-brand navbar-brand-custom" href="{% url 'home' %}">
+      <i class="bi bi-heart-pulse me-2"></i>Consultorio Salud
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}"><i class="bi bi-house-door me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'Nuestros Servicios' %}"><i class="bi bi-clipboard2-pulse me-1"></i>Servicios</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{% url 'Nuestros Medicos' %}"><i class="bi bi-person-badge me-1"></i>Médicos</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'Sobre nosotros' %}"><i class="bi bi-info-circle me-1"></i>Sobre Nosotros</a></li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-outline-primary ms-3" href="/accounts/login/">
+            <i class="bi bi-box-arrow-in-right me-1"></i> Iniciar Sesión
+          </a>
+        </li>
+      </ul>
     </div>
+  </div>
 </nav>
 
-<!-- Hero -->
-<header class="doctors-hero text-center">
-    <div class="container position-relative" data-aos="fade-up">
-        <h1 class="display-3 fw-bold mb-4">Nuestro Equipo Médico</h1>
-        <p class="lead fs-4 mb-5">Profesionales altamente calificados comprometidos con su salud</p>
+<!-- Contenido -->
+<div class="container py-2 container-fixed">
+  <div class="hero-section">
+    <h2 class="mb-1">Nuestro Equipo Médico</h2>
+    <p class="mb-0">Profesionales comprometidos con tu salud</p>
+  </div>
+
+  <div class="filter-section text-center">
+    <div>
+      <span class="filter-tag active" data-filter="all">Todos</span>
+      <span class="filter-tag" data-filter="cardiologia">Cardiología</span>
+      <span class="filter-tag" data-filter="dermatologia">Dermatología</span>
     </div>
-</header>
+  </div>
 
-<!-- Filtros -->
-<section class="container mb-5" data-aos="fade-up">
-    <div class="filter-section">
-        <h3 class="h4 text-center mb-4">Filtrar por especialidad</h3>
-        <div class="d-flex flex-wrap justify-content-center">
-            <span class="filter-tag active" data-filter="all">Todos</span>
-            <span class="filter-tag" data-filter="cardiologia">Cardiología</span>
-            <span class="filter-tag" data-filter="pediatria">Pediatría</span>
-            <span class="filter-tag" data-filter="neurologia">Neurología</span>
-            <span class="filter-tag" data-filter="ginecologia">Ginecología</span>
-            <span class="filter-tag" data-filter="traumatologia">Traumatología</span>
-            <span class="filter-tag" data-filter="dermatologia">Dermatología</span>
+  <div class="row g-3">
+    <!-- Doctor 1 -->
+    <div class="col-md-4" data-specialty="dermatologia">
+      <div class="doctor-card">
+        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Yeny" class="doctor-img">
+        <div class="doctor-info">
+          <h6>Yeny Maria Villamil Vasques</h6>
+          <small>Dermatóloga</small>
+          <p>Especialista en dermatología estética y clínica.</p>
         </div>
+      </div>
     </div>
 
-    <!-- Grid de Médicos -->
-    <div class="row g-4">
-        <!-- Médico 1 -->
-        <div class="col-lg-4 col-md-6" data-specialty="cardiologia" data-aos="fade-up">
-            <div class="doctor-card">
-                <div class="doctor-img-container position-relative">
-                    <img src="https://randomuser.me/api/portraits/women/65.jpg" class="doctor-img" alt="Dra. María González">
-                    <span class="specialty-badge">Cardióloga</span>
-                </div>
-                <div class="doctor-details">
-                    <h3 class="doctor-name">Dra. María González</h3>
-                    <p class="doctor-specialty">Cardiología · Medicina Interna</p>
-                    <p class="doctor-bio">
-                        Especialista en enfermedades cardiovasculares con más de 15 años de experiencia. Certificada por el American Board of Cardiology.
-                    </p>
-                </div>
-            </div>
+    <!-- Doctor 2 -->
+    <div class="col-md-4" data-specialty="cardiologia">
+      <div class="doctor-card">
+        <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Gelver" class="doctor-img">
+        <div class="doctor-info">
+          <h6>Gelver Orozco Carreño</h6>
+          <small>Cardiólogo</small>
+          <p>Enfermedades del corazón y prevención cardiovascular.</p>
         </div>
-
-        <!-- Médico 2 -->
-        <div class="col-lg-4 col-md-6" data-specialty="pediatria" data-aos="fade-up" data-aos-delay="100">
-            <div class="doctor-card">
-                <div class="doctor-img-container position-relative">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" class="doctor-img" alt="Dr. Carlos Martínez">
-                    <span class="specialty-badge">Pediatra</span>
-                </div>
-                <div class="doctor-details">
-                    <h3 class="doctor-name">Dr. Carlos Martínez</h3>
-                    <p class="doctor-specialty">Pediatría · Neonatología</p>
-                    <p class="doctor-bio">
-                        Especializado en cuidado infantil y medicina preventiva para niños. Miembro de la Academia Americana de Pediatría.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Médico 3 -->
-        <div class="col-lg-4 col-md-6" data-specialty="neurologia" data-aos="fade-up" data-aos-delay="200">
-            <div class="doctor-card">
-                <div class="doctor-img-container position-relative">
-                    <img src="https://randomuser.me/api/portraits/women/45.jpg" class="doctor-img" alt="Dra. Laura Sánchez">
-                    <span class="specialty-badge">Neuróloga</span>
-                </div>
-                <div class="doctor-details">
-                    <h3 class="doctor-name">Dra. Laura Sánchez</h3>
-                    <p class="doctor-specialty">Neurología · Neurofisiología</p>
-                    <p class="doctor-bio">
-                        Experta en trastornos del sistema nervioso. Investigadora principal en estudios sobre enfermedades neurodegenerativas.
-                    </p>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-</section>
+
+    <!-- Doctor 3 -->
+    <div class="col-md-4" data-specialty="dermatologia">
+      <div class="doctor-card">
+        <img src="https://randomuser.me/api/portraits/men/60.jpg" alt="Tomas" class="doctor-img">
+        <div class="doctor-info">
+          <h6>Tomas Orozco Villamil</h6>
+          <small>Dermatólogo</small>
+          <p>Diagnóstico y tratamiento de afecciones de la piel.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Footer -->
-<footer class="text-white text-center">
-    <div class="container">
-        <p class="mb-0 small">&copy; 2025 Consultorio Salud Integral. Todos los derechos reservados.</p>
-    </div>
+<footer class="footer">
+  <div class="container">
+    <p class="mb-0 small">&copy; 2025 Consultorio Salud Integral. Todos los derechos reservados.</p>
+  </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
-    AOS.init({ duration: 800, once: true });
+  AOS.init({ duration: 800, once: true });
 
-    document.querySelectorAll('.filter-tag').forEach(tag => {
-        tag.addEventListener('click', function () {
-            document.querySelector('.filter-tag.active').classList.remove('active');
-            this.classList.add('active');
+  document.querySelectorAll('.filter-tag').forEach(tag => {
+    tag.addEventListener('click', function () {
+      document.querySelector('.filter-tag.active').classList.remove('active');
+      this.classList.add('active');
 
-            const specialty = this.getAttribute('data-filter');
-            const doctors = document.querySelectorAll('[data-specialty]');
-            doctors.forEach(doctor => {
-                doctor.style.display = (specialty === 'all' || doctor.getAttribute('data-specialty').includes(specialty)) ? 'block' : 'none';
-            });
-        });
+      const specialty = this.getAttribute('data-filter');
+      const doctors = document.querySelectorAll('[data-specialty]');
+      doctors.forEach(doctor => {
+        doctor.style.display = (specialty === 'all' || doctor.getAttribute('data-specialty').includes(specialty)) ? 'block' : 'none';
+      });
     });
+  });
 </script>
 </body>
 </html>

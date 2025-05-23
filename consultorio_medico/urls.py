@@ -1,36 +1,38 @@
-"""
-URL configuration for consultorio_medico project.
+# -----------------------------------------------------------------------------
+# Nombre del Programa : Sistema de Gestión de Consultorio Médico
+# Nombre del Módulo   : urls.py
+# Función del Archivo : Configura y enruta las URL principales del proyecto a los módulos correspondientes.
+# Programador         : Neyder Sebastian Orozco Villamil
+# Fecha               : 22/05/2025
+# Versión             : 1.0
+# -----------------------------------------------------------------------------
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
+# -----------------------------------------------------------------------------
+# IMPORTACIÓN DE MÓDULOS NECESARIOS
+# -----------------------------------------------------------------------------
 from django.contrib import admin
 from django.urls import path, include
-from django.urls import path
 from . import views
 
+# -----------------------------------------------------------------------------
+# DEFINICIÓN DE PATRONES DE URL
+# Aquí se define la lista de rutas del proyecto y cómo se conectan con los distintos módulos
+# -----------------------------------------------------------------------------
 urlpatterns = [
+    # Ruta al panel de administración de Django
     path('admin/', admin.site.urls),
 
+    # Ruta a la página principal (módulo 'mainpage')
     path('', include('mainpage.urls')),
+
+    # Rutas de autenticación (login, logout, password reset, etc.)
     path('accounts/', include('django.contrib.auth.urls')),
 
+    # Ruta para redireccionamiento según el rol del usuario autenticado
     path('redirigir/', views.redirect_by_role, name='redirect_by_role'),
 
-    path('admin/', admin.site.urls),
+    # Rutas específicas para los módulos por rol
     path('paciente/', include('pacientes.urls')),
     path('medico/', include('doctores.urls')),
     path('secretaria/', include('secretaria.urls')),
-
-
- ]
+]

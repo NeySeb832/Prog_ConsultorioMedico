@@ -1,22 +1,37 @@
+# -----------------------------------------------------------------------------
+# Nombre del Programa : Sistema de Gestión de Consultorio Médico
+# Nombre del Módulo   : views.py (módulo secretaria)
+# Función del Archivo : Define las vistas para que el personal administrativo gestione citas y pacientes.
+# Programador         : Neyder Sebastian Orozco Villamil
+# Fecha               : 22/05/2025
+# Versión             : 1.0
+# -----------------------------------------------------------------------------
 
-from usuarios.decorators import role_required
+# -----------------------------------------------------------------------------
+# IMPORTACIÓN DE MÓDULOS NECESARIOS
+# -----------------------------------------------------------------------------
 from django.shortcuts import render, redirect, get_object_or_404
-from pacientes.models import Cita
-from datetime import datetime, time, timedelta
-from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.contrib.auth.models import User, Group
+from django.contrib import messages
+from datetime import datetime, timedelta
+from pacientes.models import Cita
 from usuarios.models import Profile
+from usuarios.decorators import role_required
 
-
-
-
-
+# -----------------------------------------------------------------------------
+# VISTA: secretaria_dashboard
+# Muestra el panel principal de la secretaría.
+# -----------------------------------------------------------------------------
 @login_required
 @role_required(['STAFF', 'ADMIN'])
 def secretaria_dashboard(request):
     return render(request, 'secretaria/secretaia_pantalla_inicio.html')
 
+# -----------------------------------------------------------------------------
+# VISTA: ver_citas_secretaria
+# Lista todas las citas del sistema con filtros por paciente, doctor, fecha, estado y sede.
+# -----------------------------------------------------------------------------
 @login_required
 @role_required(['STAFF', 'ADMIN'])
 def ver_citas_secretaria(request):
@@ -27,6 +42,7 @@ def ver_citas_secretaria(request):
     estado = request.GET.get('estado')
     lugar = request.GET.get('lugar')
 
+    # Aplicación de filtros si se reciben por GET
     if paciente_id:
         citas = citas.filter(paciente__id=paciente_id)
     if doctor_id:
@@ -54,12 +70,20 @@ def ver_citas_secretaria(request):
         }
     })
 
+# -----------------------------------------------------------------------------
+# VISTA: ver_detalle_cita_secretaria
+# Muestra los detalles completos de una cita.
+# -----------------------------------------------------------------------------
 @login_required
 @role_required(['STAFF', 'ADMIN'])
 def ver_detalle_cita_secretaria(request, cita_id):
     cita = get_object_or_404(Cita, id=cita_id)
     return render(request, 'secretaria/secretaria_ver_detalle_cita.html', {'cita': cita})
 
+# -----------------------------------------------------------------------------
+# VISTA: crear_citas_secretaria
+# Permite registrar una nueva cita médica como secretaria.
+# -----------------------------------------------------------------------------
 @login_required
 @role_required(['STAFF', 'ADMIN'])
 def crear_citas_secretaria(request):
@@ -128,11 +152,14 @@ def crear_citas_secretaria(request):
         'horas_disponibles': horas_disponibles
     })
 
-
+# -----------------------------------------------------------------------------
+# VISTA: editar_cita_secretaria
+# Permite modificar la información de una cita médica existente.
+# -----------------------------------------------------------------------------
 @login_required
 @role_required(['STAFF', 'ADMIN'])
 def editar_cita_secretaria(request, cita_id):
-    cita = get_object_or_404(Cita, id=cita_id)  # 👈 Corregido
+    cita = get_object_or_404(Cita, id=cita_id)
     doctores = User.objects.filter(profile__role='DOCTOR')
     horas_disponibles = generar_intervalos()
 
@@ -173,7 +200,7 @@ def editar_cita_secretaria(request, cita_id):
         cita.area = doctor.profile.especialidad
         cita.motivo = motivo
         cita.save()
-        return redirect('ver_citas_secretaria')  # Asegúrate que este nombre de URL esté correcto
+        return redirect('ver_citas_secretaria')
 
     return render(request, 'secretaria/secretaria_editar_cita.html', {
         'cita': cita,
@@ -182,9 +209,10 @@ def editar_cita_secretaria(request, cita_id):
         'horarios_ocupados': horarios_ocupados,
     })
 
-
-from django.contrib import messages
-
+# -----------------------------------------------------------------------------
+# VISTA: cancelar_cita_secretaria
+# Permite cancelar una cita médica desde la interfaz de secretaría.
+# -----------------------------------------------------------------------------
 @login_required
 @role_required(['STAFF', 'ADMIN'])
 def cancelar_cita_secretaria(request, cita_id):
@@ -198,12 +226,20 @@ def cancelar_cita_secretaria(request, cita_id):
 
     return render(request, 'secretaria/secretaria_cancelar_cita.html', {'cita': cita})
 
+# -----------------------------------------------------------------------------
+# VISTA: gestionar_pacientes_secretaria
+# Lista de todos los pacientes registrados para su gestión por parte del personal.
+# -----------------------------------------------------------------------------
 @login_required
 @role_required(['STAFF', 'ADMIN'])
 def gestionar_pacientes_secretaria(request):
     pacientes = User.objects.filter(groups__name='Pacientes').order_by('last_name')
     return render(request, 'secretaria/secretaria_gestionar_pacientes.html', {'pacientes': pacientes})
 
+# -----------------------------------------------------------------------------
+# VISTA: crear_paciente
+# Permite registrar un nuevo paciente manualmente desde la interfaz administrativa.
+# -----------------------------------------------------------------------------
 @login_required
 def crear_paciente(request):
     if request.method == 'POST':
@@ -226,21 +262,23 @@ def crear_paciente(request):
                 last_name=last_name
             )
 
-            # ✅ Agregar al grupo "pacientes"
             try:
                 grupo_pacientes = Group.objects.get(name='pacientes')
                 grupo_pacientes.user_set.add(usuario)
             except Group.DoesNotExist:
                 messages.warning(request, "El grupo 'pacientes' no existe. El usuario fue creado sin grupo.")
 
-            # ✅ Crear perfil con rol "PATIENT"
             Profile.objects.create(user=usuario, role='PATIENT')
 
             messages.success(request, f"Usuario {usuario.username} creado exitosamente.")
             return redirect('gestionar_pacientes')
 
-    return render(request,'secretaria/secretaria_crear_usuario.html')
+    return render(request, 'secretaria/secretaria_crear_usuario.html')
 
+# -----------------------------------------------------------------------------
+# VISTA: editar_paciente
+# Permite modificar los datos básicos de un paciente.
+# -----------------------------------------------------------------------------
 @login_required
 @role_required(['STAFF', 'ADMIN'])
 def editar_paciente(request, user_id):
@@ -253,7 +291,6 @@ def editar_paciente(request, user_id):
         last_name = request.POST.get('last_name')
         password = request.POST.get('password')
 
-        # Validaciones básicas si quieres evitar conflictos
         if User.objects.exclude(id=usuario.id).filter(username=username).exists():
             messages.error(request, "Ya existe un usuario con ese nombre de usuario.")
         elif User.objects.exclude(id=usuario.id).filter(email=email).exists():
@@ -264,13 +301,17 @@ def editar_paciente(request, user_id):
             usuario.first_name = first_name
             usuario.last_name = last_name
             if password:
-                usuario.set_password(password)  # Solo si se quiere actualizar la contraseña
+                usuario.set_password(password)
             usuario.save()
             messages.success(request, "Usuario actualizado correctamente.")
             return redirect('gestionar_pacientes')
 
     return render(request, 'secretaria/secretaria_editar_paciente.html', {'usuario': usuario})
 
+# -----------------------------------------------------------------------------
+# VISTA: eliminar_paciente
+# Permite eliminar definitivamente un paciente del sistema.
+# -----------------------------------------------------------------------------
 @login_required
 def eliminar_paciente(request, paciente_id):
     usuario = get_object_or_404(User, id=paciente_id)
@@ -278,11 +319,15 @@ def eliminar_paciente(request, paciente_id):
     if request.method == 'POST':
         usuario.delete()
         messages.success(request, "Paciente eliminado correctamente.")
-        return redirect('gestionar_pacientes')  # asegúrate de que exista esta URL
+        return redirect('gestionar_pacientes')
 
     messages.error(request, "La solicitud para eliminar no es válida.")
     return redirect('gestionar_pacientes')
 
+# -----------------------------------------------------------------------------
+# FUNCIÓN AUXILIAR: generar_intervalos
+# Genera una lista de horarios disponibles entre las 07:00 y 20:00 en intervalos de 15 minutos.
+# -----------------------------------------------------------------------------
 def generar_intervalos():
     inicio = datetime.strptime("07:00", "%H:%M")
     fin = datetime.strptime("20:00", "%H:%M")

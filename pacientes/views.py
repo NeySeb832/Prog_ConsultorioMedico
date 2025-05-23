@@ -1,10 +1,27 @@
+# -----------------------------------------------------------------------------
+# Nombre del Programa : Sistema de Gestión de Consultorio Médico
+# Nombre del Módulo   : views.py (módulo pacientes)
+# Función del Archivo : Define las vistas para el paciente: panel, visualización y gestión de citas.
+# Programador         : Neyder Sebastian Orozco Villamil
+# Fecha               : 22/05/2025
+# Versión             : 1.0
+# -----------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
+# IMPORTACIÓN DE MÓDULOS NECESARIOS
+# -----------------------------------------------------------------------------
 from usuarios.decorators import role_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Cita
 from django.contrib.auth.models import User
-from datetime import datetime, time, timedelta
+from datetime import datetime, timedelta
 
+# -----------------------------------------------------------------------------
+# VISTA: pacientes_dashboard
+# Descripción:
+#   Muestra al paciente un panel de bienvenida con información básica de su sesión.
+# -----------------------------------------------------------------------------
 @login_required(login_url='/accounts/login/')
 @role_required(['PATIENT', 'ADMIN'])
 def pacientes_dashboard(request):
@@ -14,12 +31,23 @@ def pacientes_dashboard(request):
     }
     return render(request, 'pacientes/pacientes_pantalla_inicio.html', context)
 
+# -----------------------------------------------------------------------------
+# VISTA: ver_citas
+# Descripción:
+#   Muestra al paciente todas sus citas activas, ordenadas cronológicamente.
+# -----------------------------------------------------------------------------
 @login_required
 @role_required(['PATIENT', 'ADMIN'])
 def ver_citas(request):
     citas = Cita.objects.filter(paciente=request.user, estado='ACTIVA').order_by('fecha', 'hora')
     return render(request, 'pacientes/pacientes_ver_citas.html', {'citas': citas})
 
+# -----------------------------------------------------------------------------
+# VISTA: crear_cita
+# Descripción:
+#   Permite al paciente agendar una nueva cita, seleccionando fecha, hora, doctor, lugar y motivo.
+#   Se valida que el doctor no tenga conflictos de horario.
+# -----------------------------------------------------------------------------
 @login_required
 @role_required(['PATIENT', 'ADMIN'])
 def crear_cita(request):
@@ -78,6 +106,12 @@ def crear_cita(request):
         'horas_disponibles': horas_disponibles
     })
 
+# -----------------------------------------------------------------------------
+# VISTA: editar_cita
+# Descripción:
+#   Permite modificar una cita existente si el horario no está ocupado por otra cita.
+#   El paciente puede cambiar fecha, hora, lugar, doctor y motivo.
+# -----------------------------------------------------------------------------
 @login_required
 @role_required(['PATIENT', 'ADMIN'])
 def editar_cita(request, cita_id):
@@ -131,6 +165,11 @@ def editar_cita(request, cita_id):
         'horarios_ocupados': horarios_ocupados,
     })
 
+# -----------------------------------------------------------------------------
+# VISTA: eliminar_cita
+# Descripción:
+#   Permite al paciente cancelar una cita cambiando su estado a "CANCELADA".
+# -----------------------------------------------------------------------------
 @login_required
 @role_required(['PATIENT', 'ADMIN'])
 def eliminar_cita(request, cita_id):
@@ -141,6 +180,11 @@ def eliminar_cita(request, cita_id):
         return redirect('ver_citas')
     return render(request, 'pacientes/pacientes_eliminar_citas.html', {'cita': cita})
 
+# -----------------------------------------------------------------------------
+# FUNCIÓN AUXILIAR: generar_intervalos
+# Descripción:
+#   Genera una lista de horarios disponibles entre las 7:00 y 20:00 en intervalos de 15 minutos.
+# -----------------------------------------------------------------------------
 def generar_intervalos():
     inicio = datetime.strptime("07:00", "%H:%M")
     fin = datetime.strptime("20:00", "%H:%M")

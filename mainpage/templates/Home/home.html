@@ -12,7 +12,11 @@
             --gradient-primary: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
         }
 
-        body {
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
             background-color: #f4f6f9;
         }
 
@@ -24,7 +28,7 @@
         .navbar-brand-custom {
             font-weight: 600;
             color: #6a11cb;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
 
         .hero-section {
@@ -33,50 +37,55 @@
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 100px 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
+            padding: 50px 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
             text-align: center;
         }
 
         .sidebar {
             background-color: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
         .card-service, .card {
             border: none;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             transition: transform 0.3s;
         }
 
         .card-service:hover, .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
 
         .doctor-img {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             object-fit: cover;
             border-radius: 50%;
-            border: 3px solid #6a11cb;
+            border: 2px solid #6a11cb;
         }
 
         .footer {
             background: var(--gradient-primary);
             color: white;
-            padding: 20px 0;
+            padding: 12px 0;
             text-align: center;
+        }
+
+        .container-home {
+            height: calc(100vh - 130px);
+            overflow: hidden;
         }
     </style>
 </head>
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg user-navbar mb-4">
+<nav class="navbar navbar-expand-lg user-navbar">
     <div class="container">
         <a class="navbar-brand navbar-brand-custom" href="{% url 'home' %}">
             <i class="bi bi-heart-pulse me-2"></i>Consultorio Salud
@@ -100,19 +109,19 @@
     </div>
 </nav>
 
-<!-- Hero Section -->
-<div class="container">
-    <div class="hero-section rounded shadow">
-        <h1 class="display-4 fw-bold">Bienvenido a Consultorio Salud</h1>
+<!-- Contenido principal -->
+<div class="container-fluid container-home">
+    <div class="hero-section">
+        <h1 class="display-6 fw-bold">Bienvenido a Consultorio Salud</h1>
         <p class="lead">Cuidando tu salud con excelencia y calidez humana</p>
     </div>
 
     <div class="row">
         <!-- Sidebar -->
-        <div class="col-md-4 mb-4">
-            <div class="sidebar">
-                <h5 class="fw-bold mb-3"><i class="bi bi-menu-button-wide me-2"></i>Módulos</h5>
-                <div class="list-group mb-4">
+        <div class="col-md-4">
+            <div class="sidebar mb-3">
+                <h5 class="fw-bold mb-2"><i class="bi bi-menu-button-wide me-2"></i>Módulos</h5>
+                <div class="list-group mb-3">
                     <a href="/accounts/login/" class="list-group-item list-group-item-action">
                         <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión
                     </a>
@@ -124,87 +133,35 @@
                     </a>
                 </div>
 
-                <h5 class="fw-bold"><i class="bi bi-clock me-2"></i>Horario</h5>
-                <ul class="list-group mb-4">
+                <h6 class="fw-bold"><i class="bi bi-clock me-2"></i>Horario</h6>
+                <ul class="list-group mb-3">
                     <li class="list-group-item">Lunes a Viernes: 8am - 8pm</li>
                     <li class="list-group-item">Sábados: 9am - 2pm</li>
                 </ul>
 
-                <h5 class="fw-bold"><i class="bi bi-telephone me-2"></i>Contacto</h5>
+                <h6 class="fw-bold"><i class="bi bi-telephone me-2"></i>Contacto</h6>
                 <p><i class="bi bi-geo-alt me-2"></i>Av. Principal #123, Ciudad</p>
                 <p><i class="bi bi-phone me-2"></i>(555) 123-4567</p>
             </div>
         </div>
 
-        <!-- Main content -->
+        <!-- Servicios y Médicos -->
         <div class="col-md-8">
-            <!-- Servicios -->
-            <section class="mb-5">
-                <h3 class="fw-bold mb-4"><i class="bi bi-clipboard2-pulse me-2"></i>Nuestros Servicios</h3>
-                <div class="row g-4">
-                    <div class="col-md-6">
-                        <div class="card card-service">
-                            <div class="card-body">
-                                <h5><i class="bi bi-heart-pulse me-2"></i>Consulta General</h5>
-                                <p>Atención médica integral para toda la familia con profesionales calificados.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card card-service">
-                            <div class="card-body">
-                                <h5><i class="bi bi-eyedropper me-2"></i>Laboratorio Clínico</h5>
-                                <p>Análisis y estudios con tecnología de última generación.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card card-service">
-                            <div class="card-body">
-                                <h5><i class="bi bi-activity me-2"></i>Chequeos Preventivos</h5>
-                                <p>Programas personalizados para detección temprana de enfermedades.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card card-service">
-                            <div class="card-body">
-                                <h5><i class="bi bi-capsule me-2"></i>Medicina Especializada</h5>
-                                <p>Contamos con especialistas en diversas áreas médicas.</p>
-                            </div>
-                        </div>
-                    </div>
+            <section class="mb-3">
+                <h5 class="fw-bold mb-3"><i class="bi bi-clipboard2-pulse me-2"></i>Servicios</h5>
+                <div class="row g-3">
+                    <div class="col-md-6"><div class="card card-service"><div class="card-body"><h6><i class="bi bi-heart-pulse me-2"></i>Consulta General</h6><p>Atención médica integral para toda la familia.</p></div></div></div>
+                    <div class="col-md-6"><div class="card card-service"><div class="card-body"><h6><i class="bi bi-eyedropper me-2"></i>Laboratorio Clínico</h6><p>Estudios con tecnología moderna.</p></div></div></div>
+                    <div class="col-md-6"><div class="card card-service"><div class="card-body"><h6><i class="bi bi-activity me-2"></i>Chequeos Preventivos</h6><p>Detección temprana de enfermedades.</p></div></div></div>
+                    <div class="col-md-6"><div class="card card-service"><div class="card-body"><h6><i class="bi bi-capsule me-2"></i>Medicina Especializada</h6><p>Especialistas en diversas áreas médicas.</p></div></div></div>
                 </div>
             </section>
 
-            <!-- Médicos -->
             <section>
-                <h3 class="fw-bold mb-4"><i class="bi bi-person-badge me-2"></i>Nuestros Médicos</h3>
-                <div class="row g-4">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body d-flex align-items-center">
-                                <img src="https://randomuser.me/api/portraits/women/65.jpg" class="doctor-img me-3" alt="Dra. María">
-                                <div>
-                                    <h5 class="card-title mb-1">Dra. María González</h5>
-                                    <small class="text-muted">Cardióloga</small>
-                                    <p class="card-text mt-2">Especialista en enfermedades cardiovasculares con más de 15 años de experiencia.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body d-flex align-items-center">
-                                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="doctor-img me-3" alt="Dr. Carlos">
-                                <div>
-                                    <h5 class="card-title mb-1">Dr. Carlos Martínez</h5>
-                                    <small class="text-muted">Pediatra</small>
-                                    <p class="card-text mt-2">Especializado en cuidado infantil y medicina preventiva para niños.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <h5 class="fw-bold mb-3"><i class="bi bi-person-badge me-2"></i>Médicos</h5>
+                <div class="row g-3">
+                    <div class="col-md-6"><div class="card"><div class="card-body d-flex align-items-center"><img src="https://randomuser.me/api/portraits/women/65.jpg" class="doctor-img me-3" alt="Dra. María"><div><h6 class="mb-1">Dra. Yeny Maria Villamil Vasquez</h6><small>Dermatologia</small><p class="mb-0">15 años de experiencia en cuidados de la piel.</p></div></div></div></div>
+                    <div class="col-md-6"><div class="card"><div class="card-body d-flex align-items-center"><img src="https://randomuser.me/api/portraits/men/55.jpg" class="doctor-img me-3" alt="Dr. Carlos"><div><h6 class="mb-1">Dr. Gelver Orozco Carreño</h6><small>Cardiologia</small><p class="mb-0">Cuidado y prevencion especializados.</p></div></div></div></div>
                 </div>
             </section>
         </div>
@@ -212,7 +169,7 @@
 </div>
 
 <!-- Footer -->
-<footer class="footer mt-5">
+<footer class="footer">
     <div class="container">
         <p class="mb-0">&copy; 2025 Consultorio Salud Integral. Todos los derechos reservados.</p>
     </div>
