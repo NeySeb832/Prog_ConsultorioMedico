@@ -37,8 +37,9 @@ urlpatterns = [
     path('ver_detalle_cita_secretaria/<int:cita_id>/', ver_detalle_cita_secretaria, name='ver_detalle_cita_secretaria'),  # Ver detalle de cita
     path('cancelar_cita_secretaria/<int:cita_id>/', cancelar_cita_secretaria, name='cancelar_cita_secretaria'),  # Cancelar cita
 
-    path('getionar_pacientes/', gestionar_pacientes_secretaria, name='gestionar_pacientes'),  # Gestionar pacientes
+    path('gestionar_pacientes/', gestionar_pacientes_secretaria, name='gestionar_pacientes'),  # Gestionar pacientes
     path('crear_paciente', crear_paciente, name='crear_paciente'),  # Registrar paciente
     path('editar_paciente/<int:user_id>/', editar_paciente, name='editar_paciente'),  # Editar paciente
     path('eliminar_paciente/<int:paciente_id>/', eliminar_paciente, name='eliminar_paciente'),  # Eliminar paciente
 ]
+

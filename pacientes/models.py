@@ -53,7 +53,7 @@ class Cita(models.Model):
     )
 
     # Motivo de la cita médica (opcional)
-    motivo = models.TextField(blank=True, null=True)
+    motivo = models.TextField(blank=True)
 
     # Estado de la cita: activa o cancelada
     estado = models.CharField(

@@ -22,9 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # -----------------------------------------------------------------------------
 # CONFIGURACIÓN DE SEGURIDAD Y DEBUG
 # -----------------------------------------------------------------------------
-SECRET_KEY = 'django-insecure-2)+&c17p%b8l^al4s101pxyq=90r$f#*y0o@h*%+b_v^laoar6'
 DEBUG = False
 ALLOWED_HOSTS = ['*']
+SECRET_KEY = 'django-insecure-2)+&c17p%b8l^al4s101pxyq=90r$f#y0o@h%+b_v^laoar6'
 
 # -----------------------------------------------------------------------------
 # DEFINICIÓN DE LAS APLICACIONES INSTALADAS

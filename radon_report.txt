@@ -1,0 +1,137 @@
+manage.py
+    F 7:0 main - A (2)
+mainpage/tests.py
+    C 6:0 MainpageViewsTest - A (2)
+    M 7:4 MainpageViewsTest.setUp - A (1)
+    M 10:4 MainpageViewsTest.test_home_view_status_code - A (1)
+    M 14:4 MainpageViewsTest.test_home_url_resolves - A (1)
+    M 18:4 MainpageViewsTest.test_about_view_status_code - A (1)
+    M 22:4 MainpageViewsTest.test_about_url_resolves - A (1)
+    M 26:4 MainpageViewsTest.test_contact_view_status_code - A (1)
+    M 30:4 MainpageViewsTest.test_contact_url_resolves - A (1)
+mainpage/views.py
+    F 21:0 home - A (1)
+    F 29:0 medicos - A (1)
+    F 37:0 servicios - A (1)
+    F 45:0 sobre_nosotros - A (1)
+mainpage/apps.py
+    C 4:0 MainpageConfig - A (1)
+secretaria/tests.py
+    C 8:0 SecretariaViewsTest - A (2)
+    M 9:4 SecretariaViewsTest.setUp - A (1)
+    M 37:4 SecretariaViewsTest.test_dashboard_secretaria - A (1)
+    M 41:4 SecretariaViewsTest.test_ver_citas_secretaria - A (1)
+    M 45:4 SecretariaViewsTest.test_ver_detalle_cita_secretaria - A (1)
+    M 50:4 SecretariaViewsTest.test_crear_cita_get - A (1)
+    M 54:4 SecretariaViewsTest.test_crear_cita_post_correcta - A (1)
+    M 65:4 SecretariaViewsTest.test_crear_cita_conflicto - A (1)
+    M 77:4 SecretariaViewsTest.test_editar_cita_get - A (1)
+    M 81:4 SecretariaViewsTest.test_editar_cita_post - A (1)
+    M 92:4 SecretariaViewsTest.test_cancelar_cita_get - A (1)
+    M 96:4 SecretariaViewsTest.test_cancelar_cita_post - A (1)
+    M 100:4 SecretariaViewsTest.test_gestionar_pacientes - A (1)
+    M 104:4 SecretariaViewsTest.test_crear_paciente - A (1)
+    M 116:4 SecretariaViewsTest.test_editar_paciente - A (1)
+    M 128:4 SecretariaViewsTest.test_eliminar_paciente - A (1)
+secretaria/views.py
+    F 43:0 ver_citas_secretaria - B (6)
+    F 250:0 crear_paciente - B (6)
+    F 167:0 editar_cita_secretaria - A (5)
+    F 300:0 editar_paciente - A (5)
+    F 95:0 crear_citas_secretaria - A (4)
+    F 224:0 cancelar_cita_secretaria - A (2)
+    F 332:0 eliminar_paciente - A (2)
+    F 347:0 generar_intervalos - A (2)
+    F 34:0 secretaria_dashboard - A (1)
+    F 85:0 ver_detalle_cita_secretaria - A (1)
+    F 241:0 gestionar_pacientes_secretaria - A (1)
+secretaria/apps.py
+    C 4:0 secretariaConfig - A (1)
+consultorio_medico/views.py
+    F 25:0 redirect_by_role - A (5)
+doctores/tests.py
+    C 8:0 DoctoresViewsTest - A (2)
+    M 9:4 DoctoresViewsTest.setUp - A (1)
+    M 44:4 DoctoresViewsTest.test_dashboard_acceso - A (1)
+    M 52:4 DoctoresViewsTest.test_detalle_cita - A (1)
+doctores/views.py
+    F 30:0 doctores_dashboard - A (1)
+    F 55:0 detalle_cita - A (1)
+doctores/apps.py
+    C 20:0 DoctoresConfig - A (1)
+usuarios/admin.py
+    C 40:0 CustomUserAdmin - B (9)
+    M 43:4 CustomUserAdmin.save_model - B (8)
+    C 28:0 ProfileInline - A (1)
+usuarios/models.py
+    C 47:0 Profile - A (2)
+    M 54:4 Profile.__str__ - A (1)
+usuarios/tests.py
+    C 12:0 UsuariosTests - A (2)
+    F 9:0 vista_protegida - A (1)
+    M 13:4 UsuariosTests.setUp - A (1)
+    M 23:4 UsuariosTests.test_str_profile - A (1)
+    M 27:4 UsuariosTests.test_decorator_acceso_permitido - A (1)
+    M 34:4 UsuariosTests.test_decorator_sin_permiso - A (1)
+    M 40:4 UsuariosTests.test_decorator_sin_login - A (1)
+usuarios/apps.py
+    C 20:0 UsuariosConfig - A (2)
+    M 25:4 UsuariosConfig.ready - A (1)
+usuarios/decorators.py
+    F 32:0 role_required - A (1)
+usuarios/signals.py
+    F 25:0 create_user_profile - A (2)
+    F 36:0 save_user_profile - A (2)
+usuarios/migrations/0003_alter_profile_user.py
+    C 8:0 Migration - A (1)
+usuarios/migrations/0002_profile_especialidad.py
+    C 6:0 Migration - A (1)
+usuarios/migrations/0006_profile_direccion_profile_telefono_and_more.py
+    C 6:0 Migration - A (1)
+usuarios/migrations/0004_alter_profile_especialidad_alter_profile_role_and_more.py
+    C 8:0 Migration - A (1)
+usuarios/migrations/0001_initial.py
+    C 8:0 Migration - A (1)
+usuarios/migrations/0005_alter_profile_user.py
+    C 8:0 Migration - A (1)
+pacientes/models.py
+    C 22:0 Cita - A (2)
+    M 72:4 Cita.__str__ - A (1)
+pacientes/tests.py
+    C 9:0 PacientesTests - A (2)
+    M 10:4 PacientesTests.setUp - A (1)
+    M 29:4 PacientesTests.test_model_str - A (1)
+    M 33:4 PacientesTests.test_model_estado_por_defecto - A (1)
+    M 36:4 PacientesTests.test_dashboard_view - A (1)
+    M 41:4 PacientesTests.test_ver_citas - A (1)
+    M 46:4 PacientesTests.test_crear_cita_get - A (1)
+    M 50:4 PacientesTests.test_crear_cita_post_exitosa - A (1)
+    M 61:4 PacientesTests.test_crear_cita_post_conflicto - A (1)
+    M 72:4 PacientesTests.test_crear_cita_doctor_inexistente - A (1)
+    M 83:4 PacientesTests.test_editar_cita_get - A (1)
+    M 87:4 PacientesTests.test_editar_cita_post_sin_conflicto - A (1)
+    M 99:4 PacientesTests.test_editar_cita_post_con_conflicto - A (1)
+    M 119:4 PacientesTests.test_eliminar_cita_get - A (1)
+    M 123:4 PacientesTests.test_eliminar_cita_post - A (1)
+pacientes/views.py
+    F 57:0 crear_cita - A (5)
+    F 121:0 editar_cita - A (5)
+    F 31:0 pacientes_dashboard - A (2)
+    F 179:0 eliminar_cita - A (2)
+    F 192:0 generar_intervalos - A (2)
+    F 45:0 ver_citas - A (1)
+pacientes/apps.py
+    C 4:0 PacientesConfig - A (1)
+pacientes/migrations/0003_profile.py
+    C 8:0 Migration - A (1)
+pacientes/migrations/0005_cita_estado.py
+    C 6:0 Migration - A (1)
+pacientes/migrations/0001_initial.py
+    C 8:0 Migration - A (1)
+pacientes/migrations/0004_delete_profile.py
+    C 6:0 Migration - A (1)
+pacientes/migrations/0002_remove_cita_especialista_cita_doctor_and_more.py
+    C 8:0 Migration - A (1)
+
+102 blocks (classes, functions, methods) analyzed.
+Average complexity: A (1.6372549019607843)

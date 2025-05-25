@@ -25,6 +25,10 @@ from usuarios.decorators import role_required
 # VISTA: secretaria_dashboard
 # Muestra el panel principal de la secretaría.
 # -----------------------------------------------------------------------------
+
+#Direccion de la plantilla Crear vistas
+crear_citasSecretaria_plantilla = 'secretaria/secretaria_crear_cita.html'
+
 @login_required
 @role_required(['STAFF', 'ADMIN'])
 def secretaria_dashboard(request):
@@ -120,7 +124,7 @@ def crear_citas_secretaria(request):
                     estado='CONFIRMADA'
                 ).values_list('hora', flat=True)
 
-                return render(request, 'secretaria/secretaria_crear_cita.html', {
+                return render(request, crear_citasSecretaria_plantilla, {
                     'error': 'El doctor ya tiene una cita en ese horario.',
                     'pacientes': pacientes,
                     'doctores': doctores,
@@ -141,14 +145,14 @@ def crear_citas_secretaria(request):
             return redirect('ver_citas_secretaria')
 
         except User.DoesNotExist:
-            return render(request, 'secretaria/secretaria_crear_cita.html', {
+            return render(request, crear_citasSecretaria_plantilla, {
                 'error': 'El paciente o doctor no existe.',
                 'pacientes': pacientes,
                 'doctores': doctores,
                 'horas_disponibles': horas_disponibles
             })
 
-    return render(request, 'secretaria/secretaria_crear_cita.html', {
+    return render(request, crear_citasSecretaria_plantilla, {
         'pacientes': pacientes,
         'doctores': doctores,
         'horas_disponibles': horas_disponibles
@@ -284,7 +288,7 @@ def crear_paciente(request):
 
         return render(request, 'secretaria/secretaria_crear_usuario.html')
 
-    except Exception as e:
+    except Exception:
         return HttpResponseServerError(f"<pre>{traceback.format_exc()}</pre>")
 
 # -----------------------------------------------------------------------------

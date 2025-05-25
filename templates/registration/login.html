@@ -37,8 +37,8 @@
 </head>
 <body>
     <div class="caja">
-        <form class="form-control" method="post">  <!-- Quitado action="accesp-login" -->
-            {% csrf_token %}  <!-- Añadido token CSRF -->
+        <form class="form-control" method="post">
+            {% csrf_token %}
             <h1 class="text-center t">Login</h1>
 
             {% if mensaje %}

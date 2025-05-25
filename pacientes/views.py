@@ -22,6 +22,10 @@ from datetime import datetime, timedelta
 # Descripción:
 #   Muestra al paciente un panel de bienvenida con información básica de su sesión.
 # -----------------------------------------------------------------------------
+
+#Direccion de la plantilla Crear vistas
+crear_citas_plantilla = 'pacientes/pacientes_crear_citas.html'
+
 @login_required(login_url='/accounts/login/')
 @role_required(['PATIENT', 'ADMIN'])
 def pacientes_dashboard(request):
@@ -76,7 +80,7 @@ def crear_cita(request):
                 citas_conflicto = Cita.objects.filter(doctor=doctor, fecha=fecha, estado='CONFIRMADA')
                 horarios_ocupados = [c.hora.strftime("%I:%M %p") for c in citas_conflicto]
 
-                return render(request, 'pacientes/pacientes_crear_citas.html', {
+                return render(request, crear_citas_plantilla, {
                     'error': 'El doctor ya tiene una cita en ese horario.',
                     'doctores': doctores,
                     'horarios_ocupados': horarios_ocupados,
@@ -95,13 +99,13 @@ def crear_cita(request):
             return redirect('ver_citas')
 
         except User.DoesNotExist:
-            return render(request, 'pacientes/pacientes_crear_citas.html', {
+            return render(request, crear_citas_plantilla, {
                 'error': 'El doctor seleccionado no existe.',
                 'doctores': doctores,
                 'horas_disponibles': horas_disponibles
             })
 
-    return render(request, 'pacientes/pacientes_crear_citas.html', {
+    return render(request, crear_citas_plantilla, {
         'doctores': doctores,
         'horas_disponibles': horas_disponibles
     })

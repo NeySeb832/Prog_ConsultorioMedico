@@ -1,0 +1,6 @@
+projectKey=consultorio_medico
+serverUrl=http://localhost:9000
+serverVersion=10.4.1.88267
+dashboardUrl=http://localhost:9000/dashboard?id=consultorio_medico
+ceTaskId=a46b7b8e-d566-482e-accb-fe95ae15c03a
+ceTaskUrl=http://localhost:9000/api/ce/task?id=a46b7b8e-d566-482e-accb-fe95ae15c03a
